@@ -3,6 +3,11 @@
 BazaDanych
 ![Zrzut ekranu 2022-01-22 150034](https://user-images.githubusercontent.com/34886043/150641406-b61740ac-f1b6-4733-abb3-988662764c88.jpg)
 
+Konfiduracja w pliku:
+
+![obraz](https://user-images.githubusercontent.com/34886043/150641545-e62fdee8-c385-4fe5-82fb-28df6e9f5da1.png)
+
+
 Działanie programu na szybko:
 
 ![obraz](https://user-images.githubusercontent.com/34886043/150641446-60e2af09-a934-4c7c-b33f-837326b58fd1.png)
