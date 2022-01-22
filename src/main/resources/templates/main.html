@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>sklep spożywczy</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<div id="menu">
+    <a href="/main">Main</a>
+    <a href="/contact">O mnie</a>
+    <a href="/cart">Koszyk</a>
+    <a th:if="${User == null}" href="/register">Zarejestruj sie</a>
+    <a th:if="${User == null}" href="/login">Zaloguj sie</a>
+    <a th:if="${User != null}" th:text="'Jestes zalogowany. Witam ' + ${User.getLogin()}" ></a>
+    <a th:if="${User != null}" href="/history">Historia </a>
+
+</div>
+
+<div id="content">
+    <div th:each="product : ${products}" class="product">
+        <div th:text="${product.getName()}" class="name"/>
+        <div th:text="'Cena: ' + ${product.getPrice()}" class="price"></div>
+        <a th:if="${User != null}" th:href="@{/cart/add/{id}(id=${product.getId()})}">Dodaj do koszyka</a>
+    </div>
+
+</div>
+</body>
+</html>

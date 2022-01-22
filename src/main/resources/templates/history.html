@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Koszyk</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<div id="menu">
+    <a href="/main">Main</a>
+    <a href="/contact">Kontakt</a>
+</div>
+
+<div id="content">
+    <a th:if="${cartHistory.size() == 0}"
+       th:text="'Nic jeszcze nie kupowales u nas :c'" ></a>
+    <div th:each="product : ${cartHistory}" class="product">
+        <div th:text="${product.getDate()}" class="name"/>
+        <div th:text="${product.getDescription()}" class="name"/>
+        <div th:text="${product.getPrice()}" class="name"/>
+    </div>
+</div>
+
+</div>
+</body>
+</html>
