@@ -1,10 +1,17 @@
 package com.shop.demo.database.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.hibernate.Session;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Common_Products", schema = "dbo", catalog = "Binance")
 public class CommonProducts {
 
@@ -21,6 +28,13 @@ public class CommonProducts {
     @Column(name = "Quantity")
     private int quantity;
 
+    public CommonProducts(String name, Double price, int quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+
     public static List<CommonProducts> loadAll() {
         Database db = Database.getInstace();
 
@@ -32,6 +46,20 @@ public class CommonProducts {
         db.entityManager.close();
 
         return list;
+    }
+
+    public static void insert(CommonProducts commonProducts) {
+        Database db = Database.getInstace();
+
+        Session session = db.entityManager.unwrap(Session.class);
+        db.transaction.begin();
+
+        //Save the employee in database
+        session.save(commonProducts);
+
+        //Commit the transaction
+        session.getTransaction().commit();
+        db.entityManager.close();
     }
 
     public void setId(Integer id) {
@@ -81,4 +109,26 @@ public class CommonProducts {
 
         return commonProducts;
     }
+
+    public Boolean delete(int id) {
+
+        try {
+            Database db = Database.getInstace();
+
+            Session session = db.entityManager.unwrap(Session.class);
+            db.transaction.begin();
+
+            CommonProducts product = session.get(CommonProducts.class, id);
+            session.delete(product);
+
+            db.entityManager.close();
+
+        }catch (Exception e){
+            return false;
+        }
+
+        return true;
+    }
+
+
 }

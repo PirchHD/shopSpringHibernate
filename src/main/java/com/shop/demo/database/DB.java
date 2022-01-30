@@ -49,7 +49,7 @@ public class DB {
         addProductToCart(orderCartPosition);
     }
 
-    private CommonProducts getProductById(int bookId) {
+    public CommonProducts getProductById(int bookId) {
         CommonProducts commonProducts = new CommonProducts();
 
         return commonProducts.loadById(bookId);
@@ -63,7 +63,11 @@ public class DB {
         products = CommonProducts.loadAll();
     }
 
+    public Boolean deleteProductById(int id) {
+        CommonProducts commonProducts = getProductById(id);
 
+        return commonProducts.delete(id);
+    }
 
     public OrderCartPosition getProductInCartById(int bookId) {
         for(OrderCartPosition product : this.orderCart) {
